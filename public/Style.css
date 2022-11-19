@@ -1,0 +1,615 @@
+html {
+    min-height: 200px;
+    min-width: 200px;
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    min-height: 200px;
+    scroll-behavior: smooth;
+}
+
+
+.content {
+    padding-top: 100px;
+}
+
+@keyframes animFlot {
+    from {width: 60px; height: 60px; }
+    to {width: 64px; height: 64px; right: 32px; bottom: 43px; font-size: 38px;}
+  }
+
+
+
+/* HEADER ------------------------------------------------------------------------------------------------------------------------- */
+
+
+header {
+    position: fixed;
+    width: 100vw;
+    display: flex;
+    min-height: 70px;
+    background-color: #0d1122;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: white;
+    
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    height: 65px;
+    margin-right: 10px;
+    margin-left: 20px;
+} 
+
+.logo-nombre:hover {
+    color: #5dbba6;
+    transition: color 0.4s;  
+    cursor: pointer;
+}   
+
+nav a{
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    padding-right: 10px;
+    transition: color 0.4s;    
+    margin-right: 20px;
+}
+
+
+nav a:hover {
+    color: #5dbba6;
+    transition: color 0.4s;  
+}
+
+.nav-final{
+    margin-right: 40px;
+}
+
+
+/* DIVS CONTENEDORES -------------------------------------------------------------------------------------------------------------------*/
+
+input{
+    font-family: "Segoe UI", Arial, sans-serif;
+    min-width: 5%;
+    max-width: 50%;
+}
+
+
+
+button{
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.base{
+    border: 0px;
+}
+
+.labels {
+    margin-left: 10px;
+    text-decoration: underline;
+    min-width: 5%;
+    max-width: 50%;
+}
+
+.ag {
+    margin-right: 10px;
+}
+
+
+.borderDiv {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: 3px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #54a895;
+    display: flex;
+    flex-wrap: row nowrap;
+    justify-content: space-around;
+    margin-inline: 7%;
+    margin-bottom: 10px; 
+    min-width: 1%;
+    max-width: 100%;
+    text-align: center;
+}
+
+
+/* BOTONES --------------------------------------------------------------------------------------------------------------------------------*/
+
+.btnDiv {
+    color: white;
+    padding: auto;
+    max-width: 50%;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+ 
+.botonEliminar{
+
+    background: rgba(200, 0, 0, 0.808);
+    border-color: rgba(200, 0, 0, 0.808);
+    outline: rgba(200, 0, 0, 0.808);
+    margin-right: 10px;
+    transition: background 0.30s;
+}
+
+.botonEliminar:hover{
+
+    background: darkred;
+
+}
+
+.botonActualizar{
+
+    background: #5d5fbb;
+    border-color: #5d5fbb;
+    outline: #5d5fbb;
+    margin-right: 5px;
+    transition: background 0.30s;
+
+}
+
+.botonActualizar:hover{
+
+    background: #4e4f9e;
+
+}
+
+.divAgregar{
+    text-align: right;
+}
+
+.botonAgregar{
+    text-decoration: none;
+    color: #fff;
+    background-color: #5dbba6;
+    padding: 1em 3em;
+    border: 1px solid ;
+    border-radius: 6px;
+    display: inline-block;
+    font-weight: 300;
+    transition: background-color .3s;
+    min-width: 40%;
+}
+
+.botonAgregar:hover{
+    color: #5dbba6;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+
+.divEliminarDef{
+    text-align: center;
+}
+
+
+.btnEliminarDef {
+    text-decoration: none;
+    color: #fff;
+    background-color: rgba(200, 0, 0, 0.808);
+    padding: 1em 3em;
+    border: 1px solid ;
+    border-radius: 6px;
+    font-weight: 450;
+    transition: background-color .3s;
+    width: 60%;
+    text-align: center;
+}
+
+.btnEliminarDef:hover {
+    color: white;
+    background-color: darkred;
+    cursor: pointer;
+}
+
+.deshabilitado {
+    color: white !important;
+    background-color: rgba(200, 0, 0, 0.808) !important;
+    cursor:initial !important;
+}
+
+
+.btnflot {
+    width: 60px; 
+    height: 60px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    text-decoration: none; 
+    border-radius: 50%; 
+    color: #fff; 
+    background: #bb5d72;
+    font-size: 32px; 
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25); 
+    position: fixed; 
+    right: 35px; 
+    bottom: 45px; 
+    transition: background 0.25s;
+    
+
+
+}
+
+.btnflot:hover {
+    animation-name: animFlot;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+    background: #a55264;
+}
+
+
+.btnArriba {
+    position: fixed;
+    right: 20px; 
+    bottom: 120px;
+    font-size: 36px;
+    text-decoration: none;
+    color: #4e4f9e;
+    opacity: 0;
+    transition: all 0.4s;
+    pointer-events: none;
+}
+
+.btnArriba.active {
+    right: 47px;
+    opacity: 1;
+    pointer-events: all;
+}
+
+
+/* MODAL ELIMINAR -----------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+.modalEliminar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #111111bd;
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+    --transform: translateY(-100vh);
+    --transition: transform .4s .4s;
+}
+
+.modalEliminar--show{
+    opacity: 1;
+    pointer-events: unset;
+    transition: opacity .3s;
+    --transform: translateY(0);
+    --transition: transform .4s .2s;
+}
+
+.modalEliminar__container{
+    margin: auto;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90%;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 3em 2.5em;
+    display: grid;
+    gap: 0.7em;
+    grid-auto-columns: 100%;
+    transform: var(--transform);
+    transition: var(--transition);
+}
+
+.modalEliminar__close{
+    position: absolute;
+    top: 3%;
+    right: 4%;
+    text-decoration: none;
+    color: #A0A0A0;
+    background-color: white;
+    display: inline-block;
+    font-size: 22px;
+    transition: background-color .3s;
+}
+
+.modalEliminar__close:hover{
+    color: #606060;
+}
+
+.tituloModalEliminar{
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "Segoe UI", Arial, sans-serif;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.inputConfirmar{
+    text-align: center;
+    width: 100%;
+    margin: 5px;
+}
+
+
+
+
+
+/* MODAL -----------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #111111bd;
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+    --transform: translateY(-100vh);
+    --transition: transform .4s .4s;
+}
+
+.modal--show{
+    opacity: 1;
+    pointer-events: unset;
+    transition: opacity .3s;
+    --transform: translateY(0);
+    --transition: transform .4s .2s;
+}
+
+.modal__container{
+    margin: auto;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90%;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 3em 2.5em;
+    display: grid;
+    gap: 1em;
+    grid-auto-columns: 100%;
+    transform: var(--transform);
+    transition: var(--transition);
+}
+
+.modal__close{
+    position: absolute;
+    top: 3%;
+    right: 4%;
+    text-decoration: none;
+    color: #A0A0A0;
+    background-color: white;
+    display: inline-block;
+    font-size: 22px;
+    transition: background-color .3s;
+}
+
+.modal__close:hover{
+    color: #606060;
+}
+
+.tituloModal{
+    font-size: 24px;
+    text-decoration: underline;
+    font-weight: bold;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+
+
+
+/* MEDIA --------------------------------------------------------------------------------------------------------------------------------- */
+
+
+@media (max-width:1520px){
+    nav{
+        padding: 10px 0px;
+    }
+
+    .borderDiv input{
+        max-width: 100%;
+    }
+
+    .borderDiv label{
+        max-width: 100%;
+    }
+
+    .borderDiv button{
+        max-width: 100%;
+    }
+
+    .nav-final {
+        margin-right: 30px;
+    }
+
+}
+
+
+
+
+
+
+@media (max-width:1254px){
+
+    .content {
+        padding-top: 150px;
+    }
+
+
+    header {
+        flex-direction: column;
+    }
+
+    nav{
+        padding: 10px 0px;
+    }
+
+    .borderDiv {
+        flex-direction: column; 
+        justify-content: space-around;
+        text-align: center;
+        max-width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .borderDiv input{
+        margin-bottom: 10px;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .borderDiv label{
+        margin-bottom: 3px;
+        max-width: 100%;
+    }
+
+    .borderDiv button{
+        margin-bottom: 5px;
+        max-width: 100%;
+        margin-inline: 20%;
+        padding-top: 3px;
+        padding-bottom: 4px;
+    }
+
+    .nav-final {
+        margin-right: 0px;
+    }
+
+    .labels {
+        margin: auto;
+        text-decoration: underline;
+        min-width: 5%;
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .base{
+        min-width: 5%;
+        max-width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+
+}
+
+
+@media (max-width:563px){
+
+    .borderDiv {
+        flex-direction: column; 
+        justify-content: space-around;
+        text-align: center;
+    }
+    
+    .modal__container{
+        display: flex;
+        flex-direction: column; 
+        text-align: center;
+        margin: auto;
+        width: 70%;
+        max-width: 500px;
+        max-height: 90%;
+        background-color: #fff;
+        border-radius: 6px;
+        padding: 3em 2.5em;
+        transform: var(--transform);
+        transition:var(--transition);
+    }
+    
+    .divsModal {
+        max-width: 100%;
+        min-width: 80%;
+        display: flex;
+        flex-direction: column; 
+        text-align: center;
+    }
+
+
+    .base {
+        min-width: 5%;
+        max-width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .divAgregar{
+        display: flex;
+        text-align: center;
+    }
+    
+    .botonAgregar{
+        width: 100%;
+    }
+
+    
+}
+
+
+
+
+
+@media (max-width:313px){
+    
+    header {
+        display: flex;
+        min-height: 70px;
+        background-color: #0d1122;
+        padding: 10px;
+        margin-bottom: 20px;
+        color: white;
+        width: 100%;
+    }
+    
+    .logo{
+        display: flex;
+        flex-direction: column; 
+        text-align: center ;
+    }
+    
+    .logo img{
+        height: 50px;
+        margin-right: 10px;
+        margin-left: 20px;
+
+    } 
+    
+    nav a{
+        display: flex;
+        flex-direction: column; 
+        text-decoration: none;
+        color: white;
+        font-weight: 500;
+        transition: color 0.4s;    
+        margin-bottom: 10px;
+    }
+    
+    .modalEliminar__container{
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+    }
+
+    .tituloModalEliminar{
+        display: flex;
+        flex-direction: column;
+    }
+
+}

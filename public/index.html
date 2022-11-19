@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="Style.css" rel="stylesheet" type="text/css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Document</title>
+</head>
+<body>
+
+    <header class="header" id="myHeader">
+
+        <div class="logo">
+
+            <img src="Logo.png" class="logo-img">
+            <h2 class="logo-nombre">Administración</h2>
+
+        </div>
+
+        <nav>
+
+            <a href="" class="nav-link"> Inicio </a>
+            <a href="" class="nav-link"> Sobre nosotros </a>
+            <a href="" class="nav-link nav-final"> Contacto </a>
+
+        </nav>
+
+
+
+    </header>
+
+    <section class="content">
+
+            <script src= "./vue/vue.js"></script>
+
+
+
+        <div class="centroDiv" id="divTrabajo">
+            <div v-for="book of books" class="borderDiv">
+                
+                <label :for="'Producto' + book.id" class="labels"> Produc. N°: </label>
+                <input type="text" :id="'Producto' + book.id" v-model="book.id" class="base" readonly> </input>
+                <label :for="'Nombre' + book.id" class="labels"> Nombre: </label>
+                <input type="text" :id="'Nombre' + book.id" v-model="book.nombre" class="base"> </input>
+                <label :for="'Páginas' + book.id" class="labels"> Páginas: </label>
+                <input type="text" :id="'Páginas' + book.id"  v-model="book.paginas" class="base"> </input>
+                <label :for="'Categoria' + book.id" class="labels"> Categoria: </label>
+                <select class="base" v-model="book.categoria"> 
+                    <option value="Romance" name="Romance"> Romance </option> 
+                    <option value="Terror" name="Terror"> Terror </option> 
+                    <option value="Suspenso" name="Suspenso"> Suspenso </option> 
+                    <option value="Misterio" name="Misterio"> Misterio </option> 
+                    <option value="Fantasía" name="Fantasía"> Fantasía </option> 
+                </select>
+
+                <button type="button" class="btnDiv botonActualizar" @click="actualizar(book.id, book.nombre, book.paginas, book.categoria)"> Actualizar </button>
+                <button type="button" class="btnDiv botonEliminar"  @click="primerPasoEliminar(book.id, book.nombre)"> Eliminar </button>
+
+            </div>
+
+        </div>
+        <br>
+        <br>
+
+        <a href="#" class="btnflot"> <i class='bx bx-plus'></i> </a>
+
+        <section class="modal">
+            <div class="modal__container" id="newAgregar">
+                <a href="#" class="modal__close"> x </a>
+                <p class="tituloModal"> DATOS NUEVO LIBRO </p>
+                    <div class= "divsModal divNew">
+                        <label for="Nombre" class="labels ag"> Nombre: </label>
+                        <input type="text" id="Nombre" name="Nombre" placeholder="Nombre" class="base" v-model="nombre"> </input>
+                        <label for="Paginas" class="labels ag"> Páginas: </label>
+                        <input type="text" id="Paginas" name="Paginas" placeholder="Paginas" class="base" v-model="paginas"> </input>
+                        <br><br>
+                        <label for="categoria" class="labels ag"> Categoria: </label>
+                        <select class="base" v-model="categoria"> 
+                            <option value="Romance" name="Romance"> Romance </option> 
+                            <option value="Terror" name="Terror"> Terror </option> 
+                            <option value="Suspenso" name="Suspenso"> Suspenso </option> 
+                            <option value="Misterio" name="Misterio"> Misterio </option> 
+                            <option value="Fantasía" name="Fantasía"> Fantasía </option> 
+                        </select>
+                    </div>
+                    <div class="divsModal divAgregar">
+                        <button type="button" class="botonAgregar" @click="agregar(nombre, paginas, categoria)"> Agregar nuevo libro </button>
+                    </div>
+            </div>
+        </section>
+
+
+        <a href="#" class="btnArriba"> <i class='bx bx-chevron-up-circle'></i> </a>
+
+<!--MODAL PARA ELIMINAR ---------------------------------------------------------------------------------------------------------------------->
+
+        <section class="modalEliminar">
+            <div class="modalEliminar__container" id="eliminarFinal">
+                <a href="#" class="modalEliminar__close" @click="unShow()"> x </a>
+                <p class="tituloModalEliminar"> ¿Seguro de que quiere eliminar el libro? </p>
+                <p class="inputConfirmar"> Ingrese el nombre del libro para confirmar la eliminación </p>
+                <p class="inputConfirmar"> <input type="text" id="nombreLibro" nombre="nombreLibro" placeholder="Nombre del libro" class="nombreLibro" v-model="nombreLibro"> </input> </p>
+                <div class="divEliminarDef">
+                    <button type="button" class="btnEliminarDef" @click="eliminar(nombreLibro)" v-if="validateDelete"> ELIMINAR DEFINITIVAMENTE </button>
+                    <button type="button" class="btnEliminarDef deshabilitado" v-else disabled> ELIMINAR DEFINITIVAMENTE </button>
+                </div>
+            </div>
+        </section>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+
+    </section>    
+    <script src="main.js"></script>
+    <script>  
+        var app = new Vue({
+            el: '#divTrabajo',
+            data:{
+                books: [],
+            },
+            methods: {
+                primerPasoEliminar(id, libroEliminar){
+                    eliminarPasoCero(id, libroEliminar)
+                    abrirModalEliminar()
+                    console.log(nombreEliminado);
+                },
+
+                actualizar(id, nombre, paginas, categoria) {
+                    fetch('http://localhost:3000/books/update?id=' + id + '&nombre=' + nombre + '&paginas=' + paginas + '&categoria=' + categoria)
+                },
+
+            },
+            created(){
+                fetch('http://localhost:3000/books')
+                .then(resp => resp.json())
+                .then(data => this.books = data.reverse()) 
+            }
+        })
+
+        
+
+        var adding = new Vue({
+            el: '#newAgregar',
+            data:{
+                nombre: '',
+                paginas: '',
+                categoria: '',
+            },
+            methods: {
+                agregar: function(nombre, paginas, categoria) {
+                    fetch('http://localhost:3000/books/add?nombre=' + nombre + '&paginas=' + paginas + '&categoria=' + categoria)
+                    .then(e => console.log('ok'))
+                    app.books = []
+                    fetch('http://localhost:3000/books')
+                    .then(resp => resp.json())
+                    .then(data => app.books = data.reverse()) 
+                },
+            },
+        })
+
+        var deleting = new Vue({
+            el: '#eliminarFinal',
+            data:{
+                nombreLibro: '',
+                nombre: '',
+                paginas: '',
+                categoria: '',
+            },
+            computed:{
+                validateDelete(){
+                    if(this.nombreLibro == '') return false
+                    if(nombreEliminado === this.nombreLibro) return true
+                    return false
+                }
+            },
+            methods: {
+                unShow(){
+                    modalEliminar.classList.remove('modalEliminar--show');
+                },
+                eliminar(nombreLibro) {
+                        fetch('http://localhost:3000/books/delete/'+ id2)
+                        .then(()=>{
+                            fetch('http://localhost:3000/books')
+                            .then(resp => resp.json())
+                            .then(data => {
+                                app.books = data.reverse()
+                                modalEliminar.classList.remove('modalEliminar--show')
+                                this.nombreLibro = '';
+                            }) 
+                    })
+                },
+            },
+        })
+
+
+
+    </script>
+</body>
+</html>
