@@ -1,5 +1,0 @@
-Cosas a hacer en el proyecto final de alex:
-
-- Agregar validaciones de datos
-
-- Agregar buscador por múltiples datos 
